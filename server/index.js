@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-// var items = require('../database-mongo');
+var items = require('../database-mongo');
 
 var app = express();
 
@@ -23,7 +23,14 @@ app.get('/items', function (req, res) {
   });
 });
 
+app.post('/posts', function(req, res) {
+  console.log('successsss');
+})
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
+//just post message first.
+//seach bar
+//on click, search bar will send post request to server
+//server will get information, and display it;		
