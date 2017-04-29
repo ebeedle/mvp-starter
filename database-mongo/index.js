@@ -27,5 +27,6 @@ var selectAll = function(callback) {
     }
   });
 };
+//new Item({description: 'bob'  }) - this will add item to database?
 
 module.exports.selectAll = selectAll;

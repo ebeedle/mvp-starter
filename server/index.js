@@ -26,11 +26,11 @@ app.get('/items', function (req, res) {
   });
 });	
 
-var ob = [];
 app.post('/posts', function(req, res) {
   ob.push(req.body.data);
-  console.log(ob);
+  console.log(ob);	
   console.log('post recieved: ', req.body.data);
+  
   res.send();
 
   // if (!req.body) return res.sendStatus(400)
