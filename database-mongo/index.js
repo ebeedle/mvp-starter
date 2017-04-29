@@ -12,7 +12,7 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
-  quantity: Number,
+  // quantity: Number,
   description: String
 });
 

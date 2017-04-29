@@ -9,6 +9,7 @@ class Search extends React.Component {
   	this.setState({value: event.target.value})
   }
   search(e) {
+  	// console.log(this.state.value)
     this.props.onSearch(this.state.value);
     e.preventDefault();	//so something, called when clicked;
   }

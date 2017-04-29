@@ -27,25 +27,38 @@ class App extends React.Component {
   }
 
   onSearch(value) {
+    console.log('on seach called', value);
+    var data = {data: value};
     $.ajax({
       url: '/posts',
       type: 'POST',
-      data: value,
+      data: data,
       success: function(value) {
-        //do something later with this
+        //do something;
       }, 
       error: function(err) {
-        conosle.log('err :', err);
+        console.log('err :', err);
       }
     })
   }
 
+  getData() {
+    $.ajax({
+      url: '/posts',
+      type: 'GET',
+      data: { order: '-createdAt' },
+      contentType: 'application/json',
+      success: function(data) {
+        console.log(data);
+     }
+    });
+}
   render () {
     return (<div>
       <h1>Item List</h1>
-      <button onClick={this.onSearch('bill')}></button>  
       <List items={this.state.items}/>
-      <Search />
+      <button onClick={this.getData}> </button>
+      <Search onSearch={this.onSearch} />
     </div>)
   }
 }
