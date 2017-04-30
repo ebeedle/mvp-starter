@@ -30,11 +30,21 @@ class App extends React.Component {
     console.log('on seach called', value);
     var data = {data: value};
     $.ajax({
-      url: '/posts',
+      url: '/',
       type: 'POST',
       data: data,
       success: function(value) {
-        //do something;
+        var messages = JSON.parse(value);
+        $('.messages').html('');
+        messages.forEach(function(message) {
+          var $node = $('<div></div>');
+          $node.text(message);
+          $('.messages').append($node);
+          // var $node = $('<div></div>');
+          // $('.messages').append($node.text(message));
+        })
+
+        // console.log(value) => results from mongo find
       }, 
       error: function(err) {
         console.log('err :', err);
@@ -55,7 +65,7 @@ class App extends React.Component {
 }
   render () {
     return (<div>
-      <h1>Item List</h1>
+      <h1> MESSAGES</h1>
       <List items={this.state.items}/>
       <button onClick={this.getData}> </button>
       <Search onSearch={this.onSearch} />

@@ -10,6 +10,7 @@ var app = express();
 
 // UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
+// app.use('/posts', express.static(__dirname + '/../react-client/dist/index2.html'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 // UNCOMMENT FOR ANGULAR
@@ -26,23 +27,42 @@ app.get('/items', function (req, res) {
   });
 });	
 
-app.post('/posts', function(req, res) {
-  ob.push(req.body.data);
-  console.log(ob);	
-  console.log('post recieved: ', req.body.data);
-  
-  res.send();
+// var jess = new items.Item({description: 'jessy'})
+// jess.save(function(err, jess) {
+//   if (err) {console.log('errorr!')}
+//   });
+
+app.post('/', function(req, res) {
+  var message = new items.Item({text: req.body.data});
+  message.save(function(err, message) {
+    if (err) {
+      console.log('error')
+    }
+  })
+
+  items.Item.find({}, function(err, docs) {
+    var messages = docs.map(function(message) {
+        return message.text;
+      })
+    if (err) {
+      res.json(err) 
+    } else {
+      res.end(JSON.stringify(messages));  //end
+    }
+  })
+
 
   // if (!req.body) return res.sendStatus(400)
   // res.send('welcome, ' + req.body.username)
 })
+// var c = items.Item.find({}, function(err, items) { console.log(items[0])});
+// console.log(c);
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
 app.get('/posts', function(req, res) {
-	console.log(ob);
-	res.send(ob);
 })
 //just post message first.
 //seach bar
